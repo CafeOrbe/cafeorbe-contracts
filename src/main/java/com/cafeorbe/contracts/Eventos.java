@@ -12,6 +12,9 @@ public final class Eventos {
     public static final String SUBASTA_INICIADA = "subasta.iniciada";
     public static final String PUJA_ACEPTADA = "puja.aceptada";
     public static final String PUJA_RECHAZADA = "puja.rechazada";
+    public static final String SUBASTA_CERRADA = "subasta.cerrada";
+    public static final String TIEMPO_EXTENDIDO = "tiempo.extendido";
+    public static final String ORBES_COBRADOS = "orbes.cobrados";
     public static final String TRANSMISION_INICIADA = "transmision.iniciada";
     public static final String TRANSMISION_DETENIDA = "transmision.detenida";
 
