@@ -11,6 +11,8 @@ import java.util.UUID;
  * @param ganadorId     comprador de la última puja válida, o {@code null} si quedó desierta
  * @param ganadorNombre nombre del ganador, o {@code null} si quedó desierta
  * @param montoFinal    monto de la puja ganadora, o {@code null} si quedó desierta
+ * @param subastadorId  dueño de la subasta, a quien se abonan los Orbes de la venta (HU-24); {@code null} en los
+ *                      eventos publicados antes de que existiera el campo
  */
 public record SubastaCerrada(
         UUID subastaId,
@@ -20,5 +22,12 @@ public record SubastaCerrada(
         String ganadorNombre,
         Long montoFinal,
         int cantidadPujas,
-        Instant cerradaEn) {
+        Instant cerradaEn,
+        UUID subastadorId) {
+
+    /** Forma anterior del evento, sin el Subastador: quien la use no dispara ningún abono. */
+    public SubastaCerrada(UUID subastaId, String nombre, String estado, UUID ganadorId, String ganadorNombre,
+                          Long montoFinal, int cantidadPujas, Instant cerradaEn) {
+        this(subastaId, nombre, estado, ganadorId, ganadorNombre, montoFinal, cantidadPujas, cerradaEn, null);
+    }
 }
