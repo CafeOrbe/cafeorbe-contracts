@@ -22,7 +22,24 @@
         <maven.compiler.release>21</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <jacoco.version>0.8.13</jacoco.version>
+        <junit.version>5.12.2</junit.version>
+        <assertj.version>3.27.7</assertj.version>
     </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>${assertj.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 
     <build>
         <plugins>
@@ -57,8 +74,7 @@
                     </execution>
                 </executions>
             </plugin>
-            <!-- JaCoCo queda instrumentado desde ya para que este repositorio mida cobertura en
-                 cuanto se le escriba el primer test. Hoy no hay tests: report se omite sin fallar. -->
+            <!-- JaCoCo mide la cobertura que SonarCloud leerá; el informe XML se escribe en la fase verify. -->
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>

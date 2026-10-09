@@ -11,6 +11,7 @@ import java.util.UUID;
  * @param ganadorId     comprador de la última puja válida, o {@code null} si quedó desierta
  * @param ganadorNombre nombre del ganador, o {@code null} si quedó desierta
  * @param montoFinal    monto de la puja ganadora, o {@code null} si quedó desierta
+ * @param subastadorId  dueño de la subasta; wallet le abona lo cobrado al ganador (HU-24)
  */
 public record SubastaCerrada(
         UUID subastaId,
@@ -20,5 +21,12 @@ public record SubastaCerrada(
         String ganadorNombre,
         Long montoFinal,
         int cantidadPujas,
-        Instant cerradaEn) {
+        Instant cerradaEn,
+        UUID subastadorId) {
+
+    /** Para eventos sin subastador conocido (el abono HU-24 se omite). */
+    public SubastaCerrada(UUID subastaId, String nombre, String estado, UUID ganadorId, String ganadorNombre,
+                          Long montoFinal, int cantidadPujas, Instant cerradaEn) {
+        this(subastaId, nombre, estado, ganadorId, ganadorNombre, montoFinal, cantidadPujas, cerradaEn, null);
+    }
 }
