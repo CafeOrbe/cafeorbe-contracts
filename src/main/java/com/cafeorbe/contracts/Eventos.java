@@ -15,6 +15,7 @@ public final class Eventos {
     public static final String SUBASTA_CERRADA = "subasta.cerrada";
     public static final String TIEMPO_EXTENDIDO = "tiempo.extendido";
     public static final String ORBES_COBRADOS = "orbes.cobrados";
+    public static final String ORBES_ABONADOS = "orbes.abonados";
     public static final String TRANSMISION_INICIADA = "transmision.iniciada";
     public static final String TRANSMISION_DETENIDA = "transmision.detenida";
 
