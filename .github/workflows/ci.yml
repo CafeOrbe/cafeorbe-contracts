@@ -6,7 +6,7 @@ on:
   pull_request:
 
 jobs:
-  build:
+  ci:
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -34,10 +34,15 @@ jobs:
       - name: Build and test
         run: mvn -B verify
 
-      - name: SonarQube scan
+      # MAN-01: el análisis espera el Quality Gate de SonarQube Cloud (máx. 10 min). Si no pasa, el job queda en
+      # rojo y, con el check `ci` obligatorio en main, el pull request no se puede integrar.
+      - name: SonarQube scan y Quality Gate
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: mvn -B org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
+        run: >-
+          mvn -B org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
+          -Dsonar.qualitygate.wait=true
+          -Dsonar.qualitygate.timeout=600
 
       - name: Publish to GitHub Packages
         if: github.ref == 'refs/heads/main'
